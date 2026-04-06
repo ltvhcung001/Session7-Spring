@@ -3,6 +3,7 @@ package org.example.session7.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.session7.dto.ApiResponse;
 import org.example.session7.entities.candidate.Candidate;
 import org.example.session7.entities.candidate.dto.CandidateCreateDTO;
 import org.example.session7.services.CandidatesService;
@@ -20,8 +21,14 @@ public class CandidateController {
     private final CandidatesService candidatesService;
 
     @PostMapping
-    public ResponseEntity<Candidate> getCandidates(@Valid @RequestBody CandidateCreateDTO dto) {
+    public ResponseEntity<ApiResponse<Candidate>> getCandidates(@Valid @RequestBody CandidateCreateDTO dto) {
         Candidate newCandidate = candidatesService.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newCandidate);
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                ApiResponse.<Candidate>builder()
+                        .success(true)
+                        .message("Tạo mới ứng viên thành công!")
+                        .data(newCandidate)
+                        .build()
+        );
     }
 }
