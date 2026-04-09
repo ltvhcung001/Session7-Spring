@@ -25,4 +25,10 @@ public class Job {
 
     @Column(name = "tax_code")
     private String taxCode;
+
+    @Column(nullable = false, name = "salary_min")
+    private Long salaryMin;
+
+    @Column(nullable = false, name = "salary_max")
+    private Long salaryMax;
 }
