@@ -30,6 +30,9 @@ public class Candidate {
     private Integer yearOfExperience;
 
     @Column
+    private String phone;
+
+    @Column
     private String address;
 
     @Column

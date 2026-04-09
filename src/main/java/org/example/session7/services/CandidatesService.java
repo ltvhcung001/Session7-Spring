@@ -20,6 +20,7 @@ public class CandidatesService {
                 .email(dto.getEmail())
                 .age(dto.getAge())
                 .yearOfExperience(dto.getYearOfExperience())
+                .phone(dto.getPhone())
                 .build();
         return candidatesRepository.save(newCandidate);
     }
