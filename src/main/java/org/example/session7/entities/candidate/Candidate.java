@@ -28,4 +28,10 @@ public class Candidate {
 
     @Column(nullable = false)
     private Integer yearOfExperience;
+
+    @Column
+    private String address;
+
+    @Column
+    private String bio;
 }

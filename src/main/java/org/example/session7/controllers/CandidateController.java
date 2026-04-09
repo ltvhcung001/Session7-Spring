@@ -6,13 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.session7.dto.ApiResponse;
 import org.example.session7.entities.candidate.Candidate;
 import org.example.session7.entities.candidate.dto.CandidateCreateDTO;
+import org.example.session7.entities.candidate.dto.CandidateUpdateDTO;
 import org.example.session7.services.CandidatesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +28,21 @@ public class CandidateController {
                         .data(newCandidate)
                         .build()
         );
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ApiResponse<Candidate>> updateCandidate(
+            @Valid @ModelAttribute CandidateUpdateDTO candidateUpdateDTO,
+            @PathVariable Long id
+    ){
+        Candidate updatedCandidate = candidatesService.update(candidateUpdateDTO, id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(
+                        ApiResponse.<Candidate>builder()
+                                .success(true)
+                                .message("Cập nhật thông tin ứng viên thành công!")
+                                .data(updatedCandidate)
+                                .build()
+                );
     }
 }
