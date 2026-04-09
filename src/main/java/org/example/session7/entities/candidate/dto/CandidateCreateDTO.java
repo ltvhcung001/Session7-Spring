@@ -21,4 +21,8 @@ public class CandidateCreateDTO {
     @NotNull(message = "Số năm kinh nghiệm không được để trống")
     @Min(value = 0, message = "Số năm kinh nghiệm không được âm")
     private Integer yearOfExperience;
+
+    @NotBlank(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "^0[35789]\\d{8}$", message = "Số điện thoại không hợp lệ")
+    private String phone;
 }
