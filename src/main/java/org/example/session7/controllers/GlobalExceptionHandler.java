@@ -29,4 +29,14 @@ public class GlobalExceptionHandler {
                 .data(errors)
                 .build();
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ApiResponse<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ApiResponse.<String>builder()
+                .success(false)
+                .message(ex.getMessage())
+                .data(null)
+                .build();
+    }
 }
